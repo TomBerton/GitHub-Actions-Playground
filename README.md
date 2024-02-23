@@ -234,7 +234,7 @@ steps:
     * Here is a list of [error codes](https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes).
     * Here is a Flake8 [cheat sheet](https://michaelcurrin.github.io/dev-cheatsheets/cheatsheets/python/linting/flake8.html) for further reference.
 
-* To ignore errors and even certain files, such as our unsolved files in the activity folders it is best to create a [`.flake8` config file](../GH_Actions_Testing/.flake8) in the top-level of the repository as follows:
+* To ignore errors and even certain files, such as our unsolved files in the activity folders it is best to create a [`.flake8` config file](.flake8) in the top-level of the repository as follows:
 
     ```text
     [flake8]
