@@ -1,3 +1,7 @@
+"""
+This Python script will run and test all the Python files in any folder in a given directory.
+"""
+
 import subprocess
 import sys
 
