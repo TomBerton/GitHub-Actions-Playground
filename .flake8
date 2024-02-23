@@ -1,0 +1,6 @@
+[flake8]
+exclude =
+    Lessons/**/**/**/**/Unsolved/
+    Lessons/**/**/**/**/Solved/
+    Homework/**/Starter_Code/
+    Homework/**/Solution/
