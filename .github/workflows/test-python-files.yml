@@ -49,3 +49,5 @@ jobs:
             if [[ $file == *.py ]]; then
                 echo "Testing $file"
                 pytest $file
+            fi
+          done
