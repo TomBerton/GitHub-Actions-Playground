@@ -1,44 +1,45 @@
 name: Test Python Files
 
 on:
+  pull_request:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    - main
+    #   # - 'aus-**'
+    #   # - 'dev-**'
+    paths-ignore:
+      # Ignore these directories.
+      - 'scripts/*.py'
 
 jobs:
-build:
+  build:
     name: Testing Python Files
     runs-on: ubuntu-latest
     # Required permissions to run the action
     permissions:
-    contents: read
-    pull-requests: read
+      contents: read
+      pull-requests: read
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Get all the changed files
-      id: changed-files
-      uses: tj-actions/changed-files@v42
+      - name: Get all the changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
         # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
         with:
-        since_last_remote_commit: true
-      env:
-        ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          since_last_remote_commit: true
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.10"
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
 
-    - name: Testing Python files
-    run: |
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+      - name: Testing Python files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             # Check for Python solution files
             if [[ $file == *solution.py ]]; then
                 echo "Testing $file"
