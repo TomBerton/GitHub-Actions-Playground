@@ -42,4 +42,4 @@ build:
             # Check for Python solution files
             if [[ $file == *solution.py ]]; then
                 echo "Testing $file"
-                python ../scripts/testing_python.py $file
+                python ../scripts/python_testing.py $file
