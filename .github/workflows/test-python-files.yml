@@ -48,6 +48,6 @@ jobs:
             # Check for Python solution files
             if [[ $file == *.py ]]; then
                 echo "Testing $file"
-                python ../scripts/python_testing.py $file
+                python $file
             fi
           done
