@@ -34,14 +34,12 @@ jobs:
 
       - name: Checks for Python files in the PR.
         run: |
-          for file in  ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $file == *.py ]]; then
-              echo "Python solution files found in the PR."
-            else
-              echo "No Python solution files found in the PR."
+          if [[ ${{ steps.changed-files.outputs.all_changed_files }} =~ *.py] ]; then
+            echo "Python solution files found in the PR."
+          else
+            echo "No Python solution files found in the PR."
             exit 0
           fi
-
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
@@ -53,7 +51,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Testing Python solution files
+      - name: Testing Python files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             # Check for Python solution files
