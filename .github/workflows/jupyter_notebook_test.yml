@@ -13,7 +13,7 @@ jobs:
     name: Checkout repository code
     runs-on: ubuntu-latest
     outputs:
-      jn-files-found: ${{ steps.check-jn-files-found.outputs.jn_files_found }}
+      jn-files-found: ${{ steps.check-jn-files-found.outputs.jn-files-found }}
     defaults:
       run:
         shell: bash -l {0}
@@ -35,17 +35,17 @@ jobs:
         run: |
           if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "\.ipynb$"; then
             echo "Jupyter notebooks found in the PR."
-            echo "{jn_files_found}={true}" >> $GITHUB_OUTPUT
+            echo "{jn-files-found:}={true}"
           else
             echo "No Jupyter notebooks found in the PR."
-            echo "{jn_files_found}={false}" >> $GITHUB_OUTPUT
+            echo "{jn-files-found:}={false}"
           fi
 
   test:
     name: Test Jupyter notebooks
-    runs-on: ubuntu-latest
     needs: check
-    if: needs.check.outputs.jn-files-found == 'true'
+    if: ${{needs.check.outputs.jn-files-found == 'true' }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository code
