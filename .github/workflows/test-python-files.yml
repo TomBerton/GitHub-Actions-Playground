@@ -36,9 +36,9 @@ jobs:
         run: |
           if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "\.py$"; then
             echo "Python solution files found in the PR."
-            exit 0
           else
             echo "No Python solution files found in the PR."
+            exit 0
           fi
 
   test:
