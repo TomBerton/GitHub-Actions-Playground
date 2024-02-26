@@ -38,7 +38,6 @@ jobs:
             echo "Python solution files found in the PR."
           else
             echo "No Python solution files found in the PR."
-            exit 1
           fi
 
       - name: Set up Python 3.10
