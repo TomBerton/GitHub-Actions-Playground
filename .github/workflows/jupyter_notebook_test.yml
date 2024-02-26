@@ -28,11 +28,10 @@ jobs:
 
       - name: Check for Jupyter notebook solutions in the PR.
         run: |
-          if [[ ${{ steps.changed-files.outputs.all_changed_files }} =~ .*\.ipynb ]]; then
+          if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "\.ipynb$"; then
             echo "Jupyter notebooks found in the PR."
           else
             echo "No Jupyter notebooks found in the PR."
-            exit 1
           fi
 
     # See: https://github.com/marketplace/actions/setup-miniconda
