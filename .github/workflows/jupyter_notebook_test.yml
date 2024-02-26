@@ -1,49 +1,64 @@
-name: Jupyter Notebooks
+name: Test Jupyter notebook files
 
 on:
   pull_request:
+  push:
     branches:
     - main
     #   # - 'aus-**'
     #   # - 'dev-**'
-    paths:
-      # Only Jupyter notebooks files in the Lessons and Homework folders will trigger the action.
-      - '**.ipynb'
 
 jobs:
-  build:
+  build-docs:
     name: Jupyter-Notebook-QA
     runs-on: ubuntu-latest
-    # Required permissions to run the action
-    permissions:
-      contents: read
-      pull-requests: read
     defaults:
       run:
         shell: bash -l {0}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+        # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
         with:
-          fetch-depth: 0
+          since_last_remote_commit: true
 
-      - name: Get changed files
+      - name: Get all the changed files
         id: changed-files
         uses: tj-actions/changed-files@v42
         # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
         with:
           since_last_remote_commit: true
-      - name: Get modified JN files
-        working-directory: .jn-files
+
+      - name: Check for Jupyter notebook solutions in the PR.
         run: |
-          git config diff.renameLimit 99000
-          git fetch origin $GITHUB_BASE_REF --depth=1
-          touch files.txt
-          if file in ${{ steps.changed-files.outputs.all_changed_files }} == *.ipynb; then
-              echo "$file was changed"
-              echo $file >> files.txt
+          if [[ $(grep -E "*solution.ipynb" ${{ steps.changed-files.outputs.all_changed_files }}) ]]; then
+            echo "Jupyter notebooks found in the PR."
+          else
+            echo "No Jupyter notebooks found in the PR."
+            exit 0
+          fi
+
+    # See: https://github.com/marketplace/actions/setup-miniconda
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          miniforge-variant: Mambaforge
+          channels: conda-forge
+          activate-environment: dev
+          environment-file: env_files/environment.yml
+          use-mamba: true
+
+      - name: Build environment
+        run:
+          conda activate dev
+
+      - name: Run script to test Jupyter notebooks
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          # Check for Juptyer notebook solution files.
+            if [[ $file == *solution.ipynb ]]; then
+                echo "Testing $file"
+                jupyter execute $file
             fi
-          rm files.txt
-          export filename_string=""
-          for i in `ls`; do export filename_string=$filename_string", "$i; done
-          echo "{filenames}={$filename_string}" >> $GITHUB_OUTPUT
+          done

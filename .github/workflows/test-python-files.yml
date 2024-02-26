@@ -32,6 +32,15 @@ jobs:
         with:
           since_last_remote_commit: true
 
+      - name: Checks for Python files in the PR.
+        run: |
+          if [[ $(grep -E "*solution.py" ${{ steps.changed-files.outputs.all_changed_files }}) ]]; then
+            echo "Python solution files found in the PR."
+          else
+            echo "No Python solution files found in the PR."
+            exit 0
+          fi
+
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
@@ -46,7 +55,7 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             # Check for Python solution files
-            if [[ $file == *.py ]]; then
+            if [[ $file == *solution.py ]]; then
                 echo "Testing $file"
                 python $file
             fi
