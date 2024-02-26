@@ -33,13 +33,17 @@ jobs:
       - name: Check for Jupyter notebook solutions in the PR.
         id: check-jn-files-found
         run: |
-          if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "\.ipynb$"; then
-            echo "Jupyter notebooks found in the PR."
-            exit 1
-          else
-            echo "No Jupyter notebooks found in the PR."
-            exit 0
-          fi
+         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          # Check for Juptyer notebook solution files.
+            if [[ $file == *solution.ipynb ]]; then
+                echo "Jupyter notebooks found in the PR."
+                echo "{jn_files_found}={true}" >> $GITHUB_OUTPUT
+                exit 1
+              else
+                echo "No Jupyter notebooks found in the PR."
+                exit 0
+            fi
+          done
 
   test:
     name: Test Jupyter notebooks
