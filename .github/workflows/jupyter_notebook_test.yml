@@ -37,6 +37,7 @@ jobs:
             # Check for Juptyer notebook solution files.
             if [[ $file == *.ipynb ]]; then
               echo "Jupyter notebooks found in the PR."
+              echo "{jn-files-found}={true}" >> $GITHUB_ENV
               exit 0
             fi
           done
