@@ -49,6 +49,11 @@ jobs:
           # Check for Juptyer notebook solution files.
             if [[ $file == *solution.ipynb ]]; then
                 echo "Testing $file"
-                ipython $file
+                # Get the path to the directory containing the notebook.
+                dir_path=$(dirname $file)
+                # Navigate to the directory containing the notebook.
+                cd $dir_path
+                # Run the notebook.
+                python ../scripts/jn_test.py
             fi
           done
