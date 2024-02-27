@@ -28,20 +28,20 @@ jobs:
         with:
           since_last_remote_commit: true
 
-      # # See: https://github.com/marketplace/actions/setup-miniconda
-      # - name: Setup Miniconda
-      #   uses: conda-incubator/setup-miniconda@v3
-      #   with:
-      #     auto-update-conda: true
-      #     miniforge-variant: Mambaforge
-      #     channels: conda-forge
-      #     activate-environment: dev
-      #     environment-file: env_files/environment.yml
-      #     use-mamba: true
+      # See: https://github.com/marketplace/actions/setup-miniconda
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          miniforge-variant: Mambaforge
+          channels: conda-forge
+          activate-environment: dev
+          environment-file: env_files/environment.yml
+          use-mamba: true
 
-      # - name: Build environment
-      #   run:
-      #     conda activate dev
+      - name: Build environment
+        run:
+          conda activate dev
 
       - name: Run script to test Jupyter notebooks
         working-directory: ./scripts
