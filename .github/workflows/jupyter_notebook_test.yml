@@ -45,18 +45,14 @@ jobs:
 
       - name: Run script to test Jupyter notebooks
         run: |
-          github_directory=/home/runner/work/GitHub-Actions-Playground/GitHub-Actions-Playground/
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Juptyer notebook solution files.
             if [[ $file == *solution.ipynb ]]; then
                 echo "Testing $file"
                 # Get the path to the directory containing the notebook.
                 dir_path=$(dirname $file)
-                echo "Directory path: $dir_path"
-                base_path=${dir_path#$github_directory}
-                echo "Base path: $base_path"
                 # Navigate to the directory containing the notebook.
-                cd $base_path
+                cd $dir_path
                 # Run the notebook.
                 python ../scripts/jn_test.py
             fi
