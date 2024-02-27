@@ -49,6 +49,6 @@ jobs:
           # Check for Juptyer notebook solution files.
             if [[ $file == *solution.ipynb ]]; then
                 echo "Testing $file"
-                jupyter nbconvert --execute $file
+                ipython $file
             fi
           done
