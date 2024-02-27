@@ -45,6 +45,7 @@ jobs:
 
       - name: Run script to test Jupyter notebooks
         run: |
+          working_directory=C:\GitHub-Actions-Playground
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Juptyer notebook solution files.
             if [[ $file == *solution.ipynb ]]; then
