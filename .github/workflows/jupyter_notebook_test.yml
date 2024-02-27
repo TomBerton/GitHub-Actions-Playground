@@ -44,6 +44,7 @@ jobs:
       #     conda activate dev
 
       - name: Run script to test Jupyter notebooks
+        working-directory: ./scripts
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Juptyer notebook solution files.
@@ -54,6 +55,6 @@ jobs:
                 # Navigate to the directory containing the notebook.
                 cd $dir_path
                 # Run the notebook.
-                python ../scripts/jn_test.py
+                python jn_test.py
             fi
           done
