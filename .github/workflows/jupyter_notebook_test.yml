@@ -44,17 +44,16 @@ jobs:
           conda activate dev
 
       - name: Run script to test Jupyter notebooks
-        working-directory: ./scripts
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          # Check for Juptyer notebook solution files.
-            if [[ $file == *solution.ipynb ]]; then
-                echo "Testing $file"
-                # Get the path to the directory containing the notebook.
-                # dir_path=$(dirname $file)/
-                # Navigate to the directory containing the notebook.
-                cd Lessons
-                # Run the notebook.
-                python jn_test.py
-            fi
-          done
+          cd Lessons
+          python ../script/jn_test.py
+          # for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          # # Check for Juptyer notebook solution files.
+          #   if [[ $file == *solution.ipynb ]]; then
+          #       echo "Testing $file"
+          #       # Navigate to the directory containing the notebook.
+          #       cd Lessons
+          #       # Run the notebook.
+          #       python ..script/jn_test.py
+          #   fi
+          # done
