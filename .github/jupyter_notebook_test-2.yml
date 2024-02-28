@@ -1,4 +1,4 @@
-name: Test Jupyter notebook files
+name: Check for and test Jupyter notebooks
 
 on:
   pull_request:
