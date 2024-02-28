@@ -12,9 +12,41 @@ jobs:
   check:
     name: Checkout repository code
     runs-on: ubuntu-latest
+    outputs:
+      jn-files-found: ${{ steps.check-jn-files-found.outputs.jn-files-found }}
     defaults:
       run:
         shell: bash -l {0}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get all the changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+        with:
+          since_last_remote_commit: true
+
+      - name: Check for Jupyter notebook solutions in the PR.
+        id: check-jn-files-found
+        run: |
+          if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q "\.ipynb$"; then
+            echo "Jupyter notebooks found in the PR."
+            echo "{jn-files-found:}={true}" >> $GITHUB_ENV
+          else
+            echo "No Jupyter notebooks found in the PR."
+            echo "{jn-files-found:}={false}" >> $GITHUB_ENV
+          fi
+
+  test:
+    name: Test Jupyter notebooks
+    needs: check
+    if: ${{needs.check.outputs.jn-files-found == 'true' }}
+    runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -47,15 +79,3 @@ jobs:
         run: |
           cd Lessons
           python ..scripts/jn_test.py
-          # for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          # # Check for Juptyer notebook solution files.
-          #   if [[ $file == *solution.ipynb ]]; then
-          #       echo "Testing $file"
-          #       # Get the path to the directory containing the notebook.
-          #       dir_path=$(dirname $file)/
-          #       # Navigate to the directory containing the notebook.
-          #       cd $dir_path
-          #       # Run the notebook.
-          #       python ..scripts/jn_test.py
-          #   fi
-          # done
