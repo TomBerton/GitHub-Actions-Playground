@@ -46,7 +46,7 @@ jobs:
       - name: Run script to test Jupyter notebooks
         run: |
           cd Lessons
-          python ..scripts/jn_test.py
+          python ../scripts/jn_test.py
           # for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # # Check for Juptyer notebook solution files.
           #   if [[ $file == *solution.ipynb ]]; then
