@@ -50,7 +50,7 @@ jobs:
 
     steps:
       - name: echo the value of jn-files-found
-        run: echo "The value of jn-files-found is ${{ needs.check.outputs }}"
+        run: echo "The value of jn-files-found is ${{ needs.check.outputs.jn-files-found }}"
 
       - name: Check out repository code
         uses: actions/checkout@v4
