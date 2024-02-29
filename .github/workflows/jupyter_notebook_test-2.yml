@@ -35,10 +35,10 @@ jobs:
         run: |
           if grep -q ".ipynb" <<< "${{ steps.changed-files.outputs.all_changed_files }}"; then
             echo "Jupyter notebooks found in the PR."
-            echo "{jn-files-found=true}" >> $GITHUB_ENV
+            echo "{jn-files-found:}={true}" >> $GITHUB_ENV
           else
             echo "No Jupyter notebooks found in the PR."
-            echo "{jn-files-found=false}" >> $GITHUB_ENV
+            echo "{jn-files-found:}={false}" >> $GITHUB_ENV
           fi
 
   test:
