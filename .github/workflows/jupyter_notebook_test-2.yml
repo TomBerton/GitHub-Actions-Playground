@@ -44,7 +44,7 @@ jobs:
   test:
     name: Test Jupyter notebooks
     needs: check
-    if: ${{ needs.check.outputs.jn-files-found == 'true' }}
+    if: ${{ needs.check.outputs.jn-files-found }}
     runs-on: ubuntu-latest
 
     steps:
