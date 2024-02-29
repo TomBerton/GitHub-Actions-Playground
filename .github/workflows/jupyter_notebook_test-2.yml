@@ -55,8 +55,6 @@ jobs:
 
       # See: https://github.com/marketplace/actions/setup-miniconda
       - name: Setup Miniconda
-        needs: check
-
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
