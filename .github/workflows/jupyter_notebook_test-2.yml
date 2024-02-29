@@ -49,11 +49,13 @@ jobs:
     # if: ${{ needs.check.outputs.jn-files-found == 'true' }}
 
     steps:
+      - name: echo the value of jn-files-found
+        run: echo "The value of jn-files-found is ${{ needs.check.outputs.jn-files-found }}"
+        
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-        run: echo "The value of jn-files-found is ${{ needs.check.outputs.jn-files-found }}"
 
       - name: Get all the changed files
         id: changed-files
