@@ -36,9 +36,6 @@ jobs:
           if grep -q "solution.ipynb" <<< "${{ steps.changed-files.outputs.all_changed_files }}"; then
             echo "Jupyter notebook solutions are in the PR."
             echo "jn-files-found=true" >> $GITHUB_OUTPUT
-          else
-            echo "There are no Jupyter notebook solutions found in the PR."
-            echo "jn-files-found=false" >> $GITHUB_OUTPUT
           fi
 
   test:
