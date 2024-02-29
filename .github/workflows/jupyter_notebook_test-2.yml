@@ -45,7 +45,7 @@ jobs:
     name: Test Jupyter notebooks
     runs-on: ubuntu-latest
     needs: check
-    if: ${{ true }}
+    if: needs.check.outputs.jn-files-found == 'true'
 
     steps:
       - name: Check out repository code
