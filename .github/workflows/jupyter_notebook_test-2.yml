@@ -45,14 +45,15 @@ jobs:
     name: Test Jupyter notebooks
     needs: check
     runs-on: ubuntu-latest
-    run: echo "The value of jn-files-found is ${{ needs.check.outputs.jn-files-found }}"
-    if: ${{ needs.check.outputs.jn-files-found == 'true' }}
+    
+    # if: ${{ needs.check.outputs.jn-files-found == 'true' }}
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+        run: echo "The value of jn-files-found is ${{ needs.check.outputs.jn-files-found }}"
 
       - name: Get all the changed files
         id: changed-files
