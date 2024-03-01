@@ -1,6 +1,6 @@
 # Python Testing Workflow
 
-## Workflow for testing Python files
+## Workflow for testing Python Files
 
 The following `test-python-files.yml` [file](.github/workflows/test-python-files.yml) is used as a GitHub Action workflow to execute Python files when a pull request is made or merged to the main branch.
 

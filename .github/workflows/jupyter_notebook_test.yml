@@ -55,7 +55,7 @@ jobs:
           fetch-depth: 0
 
       # See: https://github.com/marketplace/actions/setup-miniconda
-      - name: Setup Miniconda
+      - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
@@ -65,7 +65,7 @@ jobs:
           environment-file: env_files/environment.yml
           use-mamba: true
 
-      - name: Build environment
+      - name: Activate environment
         run:
           conda activate dev
 
