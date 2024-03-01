@@ -36,5 +36,3 @@ A detailed explanation of the workflow steps in the `test-python-files.yml` can 
 In the [.github/workflows](.github/workflows/) directory you will find the `jupyter_notebook_test.yml` [file](.github/workflows/jupyter_notebook_test.yml). This file will test all Jupyter notebooks solution files.
 
 A detailed explanation of the workflow steps in the `test-python-files.yml` can be found [here](Jupyter_Notebook_Testing.md).
-
-* **Note:** At the moment we pass the directory where the Jupyter notebook files are located, i.e., "Lessons" or "Homework" folders. Then, [jn_test.py](scripts/jn_test.py) script executes all the Jupyter notebook solution files in the directory. Ideally, we would like to execute only the solved files that have changed in the PR, which is the next step in development.
