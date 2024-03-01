@@ -22,6 +22,9 @@ on:
 
 For this workflow, we'll create two jobs. The first job will be the "check" job. This job will check the PR for solved Jupyter notebook files. If there any solved files in the PR then the second job ("test") will download the dependencies, build the `dev` environment, activate it, and execute / test the solved files.
 
+* Our build will "Checkout repository code" and will run on the latest version of ubuntu.
+* We create a variable to reference the changed Jupyter notebook files with the `jn-files-found` object. We can reference this object later to get the outputs of the job, or the changed files.
+
 ```yaml
 jobs:
   check:
@@ -31,8 +34,6 @@ jobs:
       jn-files-found: ${{ steps.check-jn-files-found.outputs.jn-files-found }}
 ```
 
-* The build job above is given the name, "Checkout repository code" and will run on the latest version of ubuntu.
-* The variable reference to the changed Jupyter notebook files is the `jn-files-found` object. We can use this object to reference the outputs of the job.
 
 ### Step 1: Checkout the Github Workspace
 
@@ -91,8 +92,7 @@ test:
       shell: bash -l {0}
 ```
 
-* The build job above is given the name, "Test Jupyter notebooks" and will run on the latest version of ubuntu.
-* This job requires, i.e., "needs", the "check" job, Before any steps are run we will check if the "output" from the "check" job is `true`. If it is, then this job will proceed. If not, then this job is skipped.
+* This job requires, i.e., "needs", the "check" job. Before any steps are run we will check if the "output" from the "check" job is `true`. If it is, then this job will proceed. If not, then this job is skipped.
 * Since we are using a bash shell commands to activate the conda environment in a later step, we need define which shell to use. In `defaults` we run the shell with `bash -l {0}`, where `l` is login, and the environment is set to `{0}` until the time of execution.
     * See the [Stackoverflow](https://stackoverflow.com/questions/69070754/shell-bash-l-0-in-github-actions#:~:text=%2Dl%20to%20insure%20a%20login,actual%20script%20command%20to%20execute.) for an explanation.
 
@@ -131,7 +131,7 @@ In this step will use set up Miniconda on the ubuntu instance and install all th
 In this step we will activate the `dev` environment.
 
 ```yaml
-  - name: Build environment
+  - name: Activate environment
     run:
       conda activate dev
 ```
