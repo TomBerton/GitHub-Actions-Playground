@@ -72,4 +72,4 @@ jobs:
       - name: Run script to test Jupyter notebooks
         run: |
           cd Lessons
-          python ..scripts/jn_test.py
+          python ../scripts/jn_test.py
