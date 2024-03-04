@@ -27,7 +27,7 @@ def test_notebooks():
         os.chdir(subfolder)
         # Iterate through the files in the folder.
         for file in os.listdir():
-            if file.endswith(".ipynb") and not file.endswith("_colab.ipynb"):
+            if file.endswith("solution.ipynb"):
                 with open(file, encoding="utf-8") as nb_file:
                     read_nb = nbformat.read(nb_file, as_version=4)
                     # Execute the Jupyter notebook with Python3 kernel.

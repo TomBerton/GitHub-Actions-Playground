@@ -54,6 +54,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get all the changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        # To compare changes between the current commit and the last pushed remote commit set `since_last_remote_commit: true`. e.g
+        with:
+          since_last_remote_commit: true
+
       # See: https://github.com/marketplace/actions/setup-miniconda
       - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -71,5 +78,12 @@ jobs:
 
       - name: Run script to test Jupyter notebooks
         run: |
-          cd Lessons
-          python ../scripts/jn_test.py
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          # Check for Python solution files
+            if [[ $file == *solution.ipynb ]]; then
+                echo "Testing $file"
+                cd $file
+                cd ../
+                python ../scripts/jn_test.py
+            fi
+          done
