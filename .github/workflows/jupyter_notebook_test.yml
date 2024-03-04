@@ -88,5 +88,6 @@ jobs:
                 echo "Directory path: $directory_path"
                 cd $directory_path
                 python ../../../../../../scripts/jn_test.py
+                cd ../../../../../../
             fi
           done
