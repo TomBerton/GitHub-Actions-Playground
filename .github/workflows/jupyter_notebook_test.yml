@@ -79,15 +79,20 @@ jobs:
       - name: Run script to test Jupyter notebooks
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          # Check for Python solution files
-            if [[ $file == *solution.ipynb ]]; then
-                echo "Testing $file"
-                gh_runner_path="/home/runner/work/GitHub-Actions-Playground/GitHub-Actions-Playground/"
-                relative_path="${file#$gh_runner_path}"
-                directory_path="$(dirname "$relative_path")"
-                echo "Directory path: $directory_path"
-                cd $directory_path
-                python ../../../../../../scripts/jn_test.py
-                cd ../../../../../../
+          # Check for Python solution files in directories containing "Lessons"
+            if [[ $file == *solution.ipynb && $file == *Lessons* ]]; then
+              ../scripts/lessons_jn_test.sh "${{ steps.changed-files.outputs.all_changed_files }}"
+            else
+              ../scripts/homework_jn_test.sh "${{ steps.changed-files.outputs.all_changed_files }}"
             fi
           done
+          #       echo "Testing $file"
+          #       gh_runner_path="/home/runner/work/GitHub-Actions-Playground/GitHub-Actions-Playground/"
+          #       relative_path="${file#$gh_runner_path}"
+          #       directory_path="$(dirname "$relative_path")"
+          #       echo "Directory path: $directory_path"
+          #       cd $directory_path
+          #       python ../../../../../../scripts/jn_test.py
+          #       cd ../../../../../../
+          #   fi
+          # done
