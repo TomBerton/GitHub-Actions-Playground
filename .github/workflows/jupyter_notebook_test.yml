@@ -81,10 +81,8 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Python solution files in directories containing "Lessons"
             if [[ $file == *Lessons* ]]; then
-              echo "Testing Lesson: $file"
               bash /home/runner/work/GitHub-Actions-Playground/GitHub-Actions-Playground/scripts/lessons_jn_test.sh "${file}"
             else
-              echo "Testing Homework: $file"
               bash /home/runner/work/GitHub-Actions-Playground/GitHub-Actions-Playground/scripts/homework_jn_test.sh "${file}"
             fi
           done

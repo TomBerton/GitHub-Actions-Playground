@@ -14,9 +14,9 @@ for file in $1; do
         cd $directory_path
 
         # Run the Python test script
-        python ../../../../scripts/jn_test.py
+        python ../../../scripts/jn_test.py
 
         # Navigate back to the original directory
-        cd ../../../../
+        cd ../../../
     fi
 done
