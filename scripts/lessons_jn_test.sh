@@ -2,14 +2,12 @@
 
 # Iterate over changed files
 for file in $1; do
-    # Check for Python solution files
+    # Check for Jupyter notebooks solution files.
     if [[ $file == *solution.ipynb ]]; then
         echo "Testing $file"
         gh_runner_path="/home/runner/work/GitHub-Actions-Playground/GitHub-Actions-Playground/"
         relative_path="${file#$gh_runner_path}"
         directory_path="$(dirname "$relative_path")"
-        echo "Directory path: $directory_path"
-
         # Change directory
         cd $directory_path
 
