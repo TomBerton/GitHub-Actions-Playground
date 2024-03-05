@@ -81,9 +81,9 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Python solution files in directories containing "Lessons"
             if [[ $file == *solution.ipynb && $file == *Lessons* ]]; then
-              bash ../scripts/lessons_jn_test.sh "${{ steps.changed-files.outputs.all_changed_files }}"
+              bash ../scripts/lessons_jn_test.sh "${file}"
             else
-              bash ../scripts/homework_jn_test.sh "${{ steps.changed-files.outputs.all_changed_files }}"
+              bash ../scripts/homework_jn_test.sh "${file}"
             fi
           done
           #       echo "Testing $file"
