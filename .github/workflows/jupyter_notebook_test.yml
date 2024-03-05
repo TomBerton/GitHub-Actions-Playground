@@ -78,13 +78,12 @@ jobs:
 
       - name: Run script to test Jupyter notebooks
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Python solution files in directories containing "Lessons"
-            if [[ $file == *solution.ipynb && $file == *Lessons* ]]; then
-              echo "Testing $file"
+            if [[ $file == *Lessons* ]]; then
+              echo "Testing Lesson: $file"
               # bash ../scripts/lessons_jn_test.sh "${file}"
             else
-              echo "Testing $file"
+              echo "Testing Homework: $file"
               # bash ../scripts/homework_jn_test.sh "${file}"
             fi
           done
