@@ -78,6 +78,7 @@ jobs:
 
       - name: Run script to test Jupyter notebooks
         run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
           # Check for Python solution files in directories containing "Lessons"
             if [[ $file == *Lessons* ]]; then
               echo "Testing Lesson: $file"
