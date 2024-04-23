@@ -48,7 +48,7 @@ jobs:
             if [[ $file == *solved.py ]]; then
                 # Extract the directory name
                 directory=$(dirname "$file")
-                Echo "Directory: $directory"
+                echo "Directory: $directory"
                 # Change directory to the "Unsolved" subdirectory
                 cd "$directory/Unsolved" || exit 1
                 # Rename the unsolved.py file to unsolved_tmp.py
