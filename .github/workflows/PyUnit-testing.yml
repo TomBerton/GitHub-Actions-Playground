@@ -72,7 +72,7 @@ jobs:
                 # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
                 mv unsolved_tmp.py unsolved.py
                 # Move back to the root directory
-                cd ../../
-                echo "In the $(pwd) directory"
+                #  cd ../
+                # echo "In the $(pwd) directory"
             fi
           done
