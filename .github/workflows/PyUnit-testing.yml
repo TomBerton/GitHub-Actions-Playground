@@ -71,6 +71,7 @@ jobs:
                     echo "Testing unsolved file"
                     cd "${unsolved_dir}"
                     echo "In the $(pwd) directory"
+                    echo $(ls)
                     python tests.py unsolved.py
                     # Remove the unsolved.py file to the solved.
                     rm unsolved.py
