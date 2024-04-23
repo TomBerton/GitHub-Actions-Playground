@@ -77,5 +77,6 @@ jobs:
                     # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
                     mv unsolved_tmp.py unsolved.py
                     echo "Moved unsolved_tmp.py back to unsolved.py"
+                done
             fi
           done
