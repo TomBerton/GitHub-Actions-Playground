@@ -49,8 +49,8 @@ jobs:
                 # Extract the directory name
                 directory=$(dirname "$file")
                 # Construct absolute paths for Solved and Unsolved directories
-                solved_dir="${directory}/Solved"
-                unsolved_dir="${directory}/Unsolved"
+                solved_dir="$directory"
+                unsolved_dir="${directory/\/Solved/\/Unsolved}
                 # Print the directory name
                 echo "Directory: $directory"
                 # Copy the solved.py file to the "Unsolved" subdirectory
