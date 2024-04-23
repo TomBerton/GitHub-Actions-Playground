@@ -58,7 +58,7 @@ jobs:
                 # mv ../Solved/*solved.py Unsolved/*unsolved.py
                 # Run the test.py file on the unsolved.py file
                 echo "Testing $changed_file"
-                python ../Unsolved/test.py $changed_file
+                python ../Unsolved/tests.py $changed_file
                 # Move the unsolved.py file back to the "Solved" subdirectory
                 mv unsolved.py solved.py
                 # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
