@@ -53,7 +53,7 @@ jobs:
                 cd "$directory" || exit 1
                 # Rename the solved.py file to unsolved.py
                 mv solved.py unsolved.py
-                changed_file = $(directory/unsolved.py)
+                changed_file="$directory/unsolved.py"
                 # Rename the solved.py file to unsolved.py
                 # mv ../Solved/*solved.py Unsolved/*unsolved.py
                 # Run the test.py file on the unsolved.py file
