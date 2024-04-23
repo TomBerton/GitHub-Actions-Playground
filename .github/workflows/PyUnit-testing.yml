@@ -51,7 +51,7 @@ jobs:
                 # Construct absolute paths for Solved and Unsolved directories
                 solved_dir="$directory"
                 echo "Solved Directory: $solved_dir"
-                unsolved_dir="${directory/\/Solved/\/Unsolved}
+                unsolved_dir="${directory/\/Solved/\/Unsolved}"
                 echo "Unsolved Directory: $unsolved_dir"
                 # Copy the solved.py file to the "Unsolved" subdirectory
                 cp "${solved_dir}/solved.py" "${unsolved_dir}"
