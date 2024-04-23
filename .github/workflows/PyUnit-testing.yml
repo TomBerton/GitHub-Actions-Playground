@@ -50,7 +50,7 @@ jobs:
                 directory=$(dirname "$file")
                 echo "Directory: $directory"
                 # Change directory to the "Unsolved" subdirectory
-                cd "$directory/Unsolved" || exit 1
+                cd "$directory" || exit 1
                 # Rename the unsolved.py file to unsolved_tmp.py
                 mv *unsolved.py *unsolved_tmp.py
                 # Rename the solved.py file to unsolved.py
