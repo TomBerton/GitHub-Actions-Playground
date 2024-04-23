@@ -48,6 +48,7 @@ jobs:
             if [[ $file == *solved.py ]]; then
                 # Extract the directory name
                 directory=$(dirname "$file")
+                echo "In the $directory directory"
                 # Construct absolute paths for Solved and Unsolved directories
                 solved_dir="$directory"
                 echo "Solved Directory: $solved_dir"
@@ -55,18 +56,23 @@ jobs:
                 echo "Unsolved Directory: $unsolved_dir"
                 # Copy the solved.py file to the "Unsolved" subdirectory
                 cp "${solved_dir}/solved.py" "${unsolved_dir}"
+                echo "Copied $file to $unsolved_dir"
                 # Rename the unsolved.py file to unsolved_tmp.py
                 mv "${unsolved_dir}/unsolved.py" "${unsolved_dir}/unsolved_tmp.py"
+                echo "Renamed unsolved.py to unsolved_tmp.py"
                 # Rename the solved.py file to unsolved.py
                 mv "${unsolved_dir}/solved.py" "${unsolved_dir}/unsolved.py"
                 # Run the test.py file on the unsolved.py file
                 echo "Testing unsolved file"
                 cd "${unsolved_dir}"
+                echo "In the $(pwd) directory"
                 python tests.py unsolved.py
                 # Remove the unsolved.py file to the solved.
                 rm unsolved.py
-                cd ..
                 # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
-                mv "${unsolved_dir}/unsolved_tmp.py" "${unsolved_dir}/unsolved.py"
+                mv unsolved_tmp.py unsolved.py
+                # Move back to the root directory
+                cd ../../
+                echo "In the $(pwd) directory"
             fi
           done
