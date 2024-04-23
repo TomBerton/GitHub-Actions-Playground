@@ -55,7 +55,7 @@ jobs:
                 unsolved_dir="${directory/\/Solved/\/Unsolved}"
                 echo "Unsolved Directory: $unsolved_dir"
                 # Copy the solved.py file to the "Unsolved" subdirectory
-                cp "${solved_dir}/solved.py" "${unsolved_dir}"
+                mv "${solved_dir}/solved.py" "${unsolved_dir}"
                 echo "Copied $file to $unsolved_dir"
                 # Rename the unsolved.py file to unsolved_tmp.py
                 mv "${unsolved_dir}/unsolved.py" "${unsolved_dir}/unsolved_tmp.py"
