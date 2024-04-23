@@ -49,18 +49,19 @@ jobs:
                 # Extract the directory name
                 directory=$(dirname "$file")
                 echo "Directory: $directory"
-                # Change directory to the "Unsolved" subdirectory
+                # Change directory to the "Solved" subdirectory
                 cd "$directory" || exit 1
-                # Rename the unsolved.py file to unsolved_tmp.py
-                mv *unsolved.py *unsolved_tmp.py
                 # Rename the solved.py file to unsolved.py
-                mv ../Solved/*solved.py Unsolved/*unsolved.py
+                mv solved.py unsolved.py
+                # Rename the solved.py file to unsolved.py
+                # mv ../Solved/*solved.py Unsolved/*unsolved.py
                 # Run the test.py file on the unsolved.py file
-                python test.py *unsolved.py
+                echo "Testing $file"
+                python ../Unsolved/test.py unsolved.py
                 # Move the unsolved.py file back to the "Solved" subdirectory
-                mv Unsolved/*unsolved.py ../Solved/*solved.py
+                mv unsolved.py solved.py
                 # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
-                mv Unsolved/*unsolved_tmp.py Unsolved/*unsolved.py
+                # mv Unsolved/*unsolved_tmp.py Unsolved/*unsolved.py
                 # Return to the previous directory
                 cd - || exit 1
             fi
