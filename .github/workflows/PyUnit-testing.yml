@@ -1,4 +1,4 @@
-name: Test Python Files
+name: PyUnit Testing
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    name: Testing Python Files
+    name: Set up job
     runs-on: ubuntu-latest
     # Required permissions to run the action
     permissions:
@@ -41,27 +41,27 @@ jobs:
         run: |
           python -m pip install --upgrade pip
 
-          name: Testing Python files
-          run: |
-            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              # Check for Python solution files
-              if [[ $file == *solved.py ]]; then
-                    # Extract the directory name
-                    directory=$(dirname "$file")
-                    Echo "Directory: $directory"
-                    # Change directory to the "Unsolved" subdirectory
-                    cd "$directory/Unsolved" || exit 1
-                    # Rename the unsolved.py file to unsolved_tmp.py
-                    mv *unsolved.py *unsolved_tmp.py
-                    # Rename the solved.py file to unsolved.py
-                    mv ../Solved/*solved.py Unsolved/*unsolved.py
-                    # Run the test.py file on the unsolved.py file
-                    python test.py *unsolved.py
-                    # Move the unsolved.py file back to the "Solved" subdirectory
-                    mv Unsolved/*unsolved.py ../Solved/*solved.py
-                    # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
-                    mv Unsolved/*unsolved_tmp.py Unsolved/*unsolved.py
-                    # Return to the previous directory
-                    cd - || exit 1
-              fi
-            done
+      - name: PyUnit Testing
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            # Check for Python solution files
+            if [[ $file == *solved.py ]]; then
+                # Extract the directory name
+                directory=$(dirname "$file")
+                Echo "Directory: $directory"
+                # Change directory to the "Unsolved" subdirectory
+                cd "$directory/Unsolved" || exit 1
+                # Rename the unsolved.py file to unsolved_tmp.py
+                mv *unsolved.py *unsolved_tmp.py
+                # Rename the solved.py file to unsolved.py
+                mv ../Solved/*solved.py Unsolved/*unsolved.py
+                # Run the test.py file on the unsolved.py file
+                python test.py *unsolved.py
+                # Move the unsolved.py file back to the "Solved" subdirectory
+                mv Unsolved/*unsolved.py ../Solved/*solved.py
+                # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
+                mv Unsolved/*unsolved_tmp.py Unsolved/*unsolved.py
+                # Return to the previous directory
+                cd - || exit 1
+            fi
+          done
