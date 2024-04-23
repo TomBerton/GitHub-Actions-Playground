@@ -51,18 +51,23 @@ jobs:
                 echo "Directory: $directory"
                 # Change directory to the "Solved" subdirectory
                 cd "$directory" || exit 1
+                # Copy the solved.py file to the "Unsolved" subdirectory
+                cp solved.py ../Unsolved
+                # Change directory to the "Unsolved" subdirectory
+                cd ../Unsolved || exit 1
+                # Rename the unsolved.py file to unsolved_tmp.py
+                mv unsolved.py unsolved_tmp.py
                 # Rename the solved.py file to unsolved.py
                 mv solved.py unsolved.py
-                changed_file="$directory/unsolved.py"
-                # Rename the solved.py file to unsolved.py
-                # mv ../Solved/*solved.py Unsolved/*unsolved.py
                 # Run the test.py file on the unsolved.py file
-                echo "Testing $changed_file"
-                python ../Unsolved/test.py $changed_file
+                echo "Testing unsolved file"
+                python tests.py unsolved.py
                 # Move the unsolved.py file back to the "Solved" subdirectory
                 mv unsolved.py solved.py
                 # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
-                # mv Unsolved/*unsolved_tmp.py Unsolved/*unsolved.py
+                mv unsolved_tmp.py unsolved.py
+                # Copy the solved.py file to the "Solved" subdirectory
+                cp solved.py ../Solved
                 # Return to the previous directory
                 cd - || exit 1
             fi
