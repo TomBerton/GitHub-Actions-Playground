@@ -48,6 +48,7 @@ jobs:
             if [[ $file == *solved.py ]]; then
                 # Extract the directory name
                 directory=$(dirname "$file")
+                # Print the directory name
                 echo "Directory: $directory"
                 # Change directory to the "Solved" subdirectory
                 cd "$directory" || exit 1
@@ -68,7 +69,5 @@ jobs:
                 mv unsolved_tmp.py unsolved.py
                 # Copy the solved.py file to the "Solved" subdirectory
                 cp solved.py ../Solved
-                # Return to the previous directory
-                cd - || exit 1
             fi
           done
