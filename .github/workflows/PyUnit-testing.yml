@@ -53,10 +53,10 @@ jobs:
                 for ((i=0;i<${#solved_files[@]};i++)); do
                     # Get the name the current file.
                     current_file="${solved_files[$i]}"
-                    echo "Solved file: ${solved_files[$i]}"
+                    echo "Solved file: ${current_file}"
                     if ["$current_file" != "$previous_file" ]; then
                         # Extract the directory name
-                        solved_dir="${solved_files%/*}"
+                        solved_dir="${current_file%/*}"
                         echo "The $solved_dir directory"
                         # Construct absolute paths for Solved and Unsolved directories
                         unsolved_dir="${solved_dir/\/Solved/\/Unsolved}"
