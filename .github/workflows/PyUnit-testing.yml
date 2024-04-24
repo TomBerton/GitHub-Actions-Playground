@@ -50,8 +50,6 @@ jobs:
             if [[ $file == */solved.py ]]; then
                 # Add the path of the solved file to the array
                 solved_files+=("$file")
-
-                previous_file=""
                 for ((i=0;i<${#solved_files[@]};i++)); do
                     # Get the name the current file.
                     current_file="${solved_files[$i]}"
@@ -73,10 +71,12 @@ jobs:
 
                         # Rename the solved.py file to unsolved.py
                         mv "${unsolved_dir}/solved.py" "${unsolved_dir}/unsolved.py"
+                        echo "Renamed solved.py to unsolved.py"
+
                         # Run the test.py file on the unsolved.py file
                         echo "Testing unsolved file"
-
                         python "${unsolved_dir}/tests.py"
+
                         mv "${unsolved_dir}/unsolved.py" "${solved_dir}/solved.py"
                         echo "Moved unsolved.py back to solved.py"
 
