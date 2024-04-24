@@ -86,6 +86,8 @@ jobs:
 
                         # Update the previous file to the current file
                         previous_file="$current_file"
+                    else
+                        echo "The file has already been processed"
                     fi
                 done
             fi
