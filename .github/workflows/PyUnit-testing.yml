@@ -47,9 +47,10 @@ jobs:
           solved_files=()
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             # Check for Python solution files
-            if [[ $file == */solved.py ]]; then
+            if [[ $file == *solved.py ]]; then
                 # Add the path of the solved file to the array
                 solved_files+=("$file")
+                previous_file=""
                 for ((i=0;i<${#solved_files[@]};i++)); do
                     # Get the name the current file.
                     current_file="${solved_files[$i]}"
