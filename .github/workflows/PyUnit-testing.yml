@@ -71,7 +71,7 @@ jobs:
                     mv "${unsolved_dir}/unsolved.py" "${solved_dir}/solved.py"
                     echo "Moved unsolved.py back to solved.py"
                     # Move the unsolved_tmp.py file back to the "Unsolved" subdirectory
-                    mv "${unsolved_dir}/unolved_tmp.py" "${unsolved_dir}/unsolved.py"
+                    mv "${unsolved_dir}/unsolved_tmp.py" "${unsolved_dir}/unsolved.py"
                     echo "Moved unsolved_tmp.py back to unsolved.py"
                 done
             fi
