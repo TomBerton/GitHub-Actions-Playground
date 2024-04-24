@@ -53,10 +53,10 @@ jobs:
                 for ((i=0;i<${#solved_files[@]};i++)); do
                     echo "Solved file: ${solved_files[$i]}"
                     # Extract the directory name
-                    solved_directory=$(dirname "$solved_file")
-                    echo "In the $solved_directory directory"
+                    solved_dir="${solved_files%/*}"
+                    echo "The $solved_dir directory"
                     # Construct absolute paths for Solved and Unsolved directories
-                    unsolved_dir="${solved_directory/\/Solved/\/Unsolved}"
+                    unsolved_dir="${solved_dir/\/Solved/\/Unsolved}"
                     # Copy the solved.py file to the "Unsolved" subdirectory
                     mv "${solved_dir}/solved.py" "${unsolved_dir}/solved.py"
                     echo "Copied $file to $unsolved_dir"
