@@ -96,7 +96,7 @@ test:
 * Since we are using a bash shell commands to activate the conda environment in a later step, we need define which shell to use. In `defaults` we run the shell with `bash -l {0}`, where `l` is login, and the environment is set to `{0}` until the time of execution.
     * See the [Stackoverflow](https://stackoverflow.com/questions/69070754/shell-bash-l-0-in-github-actions#:~:text=%2Dl%20to%20insure%20a%20login,actual%20script%20command%20to%20execute.) for an explanation.
 
-### Step 1: Checkout the Github Workspace
+### Checkout the Github Workspace
 
 In the first step we checkout the GitHub workspace using `actions/checkout@v4`.
 
@@ -108,7 +108,7 @@ steps:
       fetch-depth: 0
 ```
 
-### Step 2: Set up Miniconda
+### Set up Miniconda
 
 In this step will use set up Miniconda on the ubuntu instance and install all the requirements as defined in the `environment.yml` file using `conda-forge` in the `dev` environment.
 
@@ -126,7 +126,7 @@ In this step will use set up Miniconda on the ubuntu instance and install all th
 ```
 
 
-### Step 3: Activate the Conda Environment
+### Activate the Conda Environment
 
 In this step we will activate the `dev` environment.
 
@@ -137,7 +137,7 @@ In this step we will activate the `dev` environment.
 ```
 
 
-### Step 4: Run script to test Jupyter notebooks
+### Run script to test Jupyter notebooks
 
 In this step we will change directory to the "Lessons" directory where activities are stored, then run the `jn_test.py` file which will execute only the Jupyter notebook solution files.
 
@@ -148,6 +148,6 @@ In this step we will change directory to the "Lessons" directory where activitie
     python ../scripts/jn_test.py
 ```
 
-#### Final Notes:
+#### Final Notes
 
 The [jn_test.py](scripts/jn_test.py) script executes all the Jupyter notebook solution files in the given directory irregardless if it is in the PR or not. Ideally, we would like to execute only the solved files that have changed in the PR, which is the next step in development.

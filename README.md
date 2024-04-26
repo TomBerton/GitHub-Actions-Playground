@@ -18,21 +18,20 @@ After clicking on "Actions", you will be asked to choose a workflow, or you can 
 
 Alternatively, you can create a `.github/workflows` directory, and add your workflow to the `workflows` folder.
 
-##  Workflow for linting Python Files
+## Workflow for Linting Python Files
 
-In the [.github/workflows](.github/workflows/) directory you will find the `python-linting.yml` [file](.github/workflows/python-linting.yml). This file will perform linting on all the files Python files that have been changed on the PR using flake8.
+In the [.github/workflows](.github/workflows/) directory, you will find the [`python-linting.yml` file](.github/workflows/python-linting.yml). This file will perform linting on all the Python files that have been changed in the PR using Flake8.
 
 A detailed explanation of the workflow steps in the `python-linting.yml` can be found [here](Python_Linting.md).
 
 ## Workflow for Testing Python Files
 
-In the [.github/workflows](.github/workflows/) directory you will find the `test-python-files.yml` [file](.github/workflows/test-python-files.yml). This file will test all Python solution files that have been changed on the PR.
+In the [.github/workflows](.github/workflows/) directory, you will find the [`test-python-files.yml` file](.github/workflows/test-python-files.yml). This file will test all Python solution files that have been changed in the PR.
 
 A detailed explanation of the workflow steps in the `test-python-files.yml` can be found [here](Python_Testing.md).
 
-
 ## Workflow for Testing Jupyter Notebook Files
 
-In the [.github/workflows](.github/workflows/) directory you will find the `jupyter_notebook_test.yml` [file](.github/workflows/jupyter_notebook_test.yml). This file will test all Jupyter notebooks solution files.
+In the [.github/workflows](.github/workflows/) directory, you will find the [`jupyter_notebook_test.yml` file](.github/workflows/jupyter_notebook_test.yml). This file will test all Jupyter notebook solution files.
 
-A detailed explanation of the workflow steps in the `test-python-files.yml` can be found [here](Jupyter_Notebook_Testing.md).
+A detailed explanation of the workflow steps in the `jupyter_notebook_test.yml` can be found [here](Jupyter_Notebook_Testing.md).

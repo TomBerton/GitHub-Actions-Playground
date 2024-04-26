@@ -50,7 +50,7 @@ jobs:
 Underneath the `jobs` object we define the steps in the workflow using the `steps` object.
 * The `steps` object  contains information about the steps in the current job.
 
-### Step 1: Checkout the Github Workspace
+### Checkout the Github Workspace
 
 ```yaml
 steps:
@@ -65,7 +65,7 @@ steps:
 * This action will be updated periodically and will need to change with the latest version.
 * We use `fetch-depth: 0` to get the latest changes from the previous commit.
 
-### Step 2: Get the Changed Files in the PR
+### Get the Changed Files in the PR
 
 In this step, we will get all the changed files like we did with linting.
 
@@ -86,7 +86,7 @@ In this step, we will get all the changed files like we did with linting.
       since_last_remote_commit: true
     ```
 
-### Step 3: Set up Python
+### Set up Python
 
 In this step will use the GitHub action `actions/setup-python@v5` to install the version of Python using the `with` statement.
 
@@ -101,7 +101,7 @@ In this step will use the GitHub action `actions/setup-python@v5` to install the
 * This action will need to be updated periodically.
 * You can view the source of this action [here](https://github.com/actions/setup-python).
 
-### Step 4: Install Dependencies
+### Install Dependencies
 
 In this step we will install the latest version of `pip`.
 
@@ -112,7 +112,7 @@ In this step we will install the latest version of `pip`.
 ```
 
 
-### Step 5: Testing Python code.
+### Testing Python code.
 
 In this step we will execute only the Python solution files that have changed in the PR by using:
 

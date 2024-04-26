@@ -45,7 +45,6 @@ jobs:
     * Our "build" job will run on the latest version of ubuntu.
 * The permissions are set to read the contents of the repository and pull requests.
 
-
 ## Workflow Steps
 
 Underneath the `jobs` object we define the steps in the workflow using the `steps` object.
@@ -53,7 +52,7 @@ Underneath the `jobs` object we define the steps in the workflow using the `step
 
 Underneath the `steps` object we can add as many steps as needed using the `name` parameter.
 
-### Step 1: Checkout the Github Workspace
+### Checkout the Github Workspace
 
 ```yaml
 steps:
@@ -68,7 +67,7 @@ steps:
 * This action will be updated periodically and will need to change with the latest version.
 * We use `fetch-depth: 0` to get the latest changes from the previous commit.
 
-### Step 2: Get the Changed Files in the PR
+### Get the Changed Files in the PR
 
 ```yaml
 - name: Get changed files
@@ -89,7 +88,7 @@ steps:
       since_last_remote_commit: true
     ```
 
-### Step 3: Print out all the Changed Files
+### Print out all the Changed Files
 
 ```yaml
 - name: Print all the changed files
@@ -110,7 +109,7 @@ steps:
 * Next, we use the `run` command to print out all the files referencing the variable, `ALL_CHANGED_FILES`,using bash shell commands.
 
 
-### Step 4: Set up Python
+### Set up Python
 
 ```yaml
 - name: Set up Python 3.10
@@ -123,7 +122,7 @@ steps:
 * This action will need to be updated periodically.
     * You can view the source of this action [here](https://github.com/actions/setup-python).
 
-### Step 5: Install Dependencies
+### Install Dependencies
 
 ```yaml
  - name: Install dependencies
@@ -135,7 +134,7 @@ steps:
 * This step, "Install Dependencies", will install and upgrade to the latest version of `pip`, and install `flake8`.
 
 
-### Step 6: Lint Python code using Flake 8.
+### Lint Python code using Flake 8
 
 ```yaml
 -  name: Lint with flake8
@@ -161,14 +160,13 @@ steps:
         echo "Linting $file"
     ```
 
-    * **Note:** Beware that unsolved Python files may cause linting to fail, since we provide code they students have to build on.
+* **Note:** Beware that unsolved Python files may cause linting to fail, since we provide code they students have to build on.
 
 * This step will check for syntax errors and undefined names, and we will get a warning if a line is more than 127 characters long.
 * If there are any errors the build will halt and you will have to fix the errors through a commit to the PR. Then, the workflow will run again.
-
-    * We can exclude some errors by using `--select=!E9`, for example. Or add them to the `.flake8` config file (described next).
-    * Here is a list of [error codes](https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes).
-    * Here is a Flake8 [cheat sheet](https://michaelcurrin.github.io/dev-cheatsheets/cheatsheets/python/linting/flake8.html) for further reference.
+* We can exclude some errors by using `--select=!E9`, for example. Or add them to the `.flake8` config file (described next).
+* Here is a list of [error codes](https://pycodestyle.pycqa.org/en/latest/intro.html#error-codes).
+* Here is a Flake8 [cheat sheet](https://michaelcurrin.github.io/dev-cheatsheets/cheatsheets/python/linting/flake8.html) for further reference.
 
 * To ignore errors and even certain files, such as our unsolved files in the activity folders it is best to create a [`.flake8` config file](.flake8) in the top-level of the repository as follows:
 
@@ -181,6 +179,6 @@ steps:
         Homework/**/Solution/
     ```
 
-#### Final Notes:
+#### Final Notes
 
 One of the issues I ran into was linting was performed on every Python file in the directory.To make sure linting only occurs on the changed files in the PR, I excluded specific directories in the `.flake8` config file. I did this because, we would assume that once a file is in the main branch it has gone through the linting process.
