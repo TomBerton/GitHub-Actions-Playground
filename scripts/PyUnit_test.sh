@@ -49,7 +49,7 @@ for file in "$1"; do
                 if [ -f "$test_file" ]; then
                     echo "Found test file: $test_file"
                     echo "Testing renamed solved.py to unsolved.py"
-                    pytest "$test_file"
+                    python -m unittest -v "$test_file"
                 else
                     echo "Test file not found."
                 fi
